@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="./index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+</head>
+<body oncontextmenu="return false">
+    <main>
+        <h1>Minesweeper</h1>
+        <div class="buttonBox">
+            <div>
+                <div class="difficulty">
+                    <button id ='easy'>Easy</button>
+                    <button id ='medium'>Medium</button>
+                    <button id ='hard'>hard</button>
+                </div>
+            </div>
+            <div class="difficulty">
+                <button id="flag">Flag</button>
+                <div>
+                    <p>Bombs:</p>
+                    <p id="counter">10</p>
+                </div>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
+        <table id="Grid">
+        </table>
+    </main>
+<script src="./functions.js"></script>
+</body>
