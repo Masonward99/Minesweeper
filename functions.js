@@ -5,7 +5,7 @@ const table = document.getElementById("Grid");
 const button = document.getElementById('flag');
 const reset = document.getElementById('reset');
 const count = document.getElementById('counter')
-
+const timer = document.getElementById('timer')
 let firstClick; 
 let flag = false;
 // counter for number of cells with class of visible
@@ -13,6 +13,8 @@ let visibleCounter
 //counter displayed on screen
 let counter 
 let lastGrid = { rows: 9, cols: 9, mines: 10 }
+let time;
+let seconds;
 
 function createGrid(rows, cols, mines) {
     firstClick = true
@@ -21,7 +23,6 @@ function createGrid(rows, cols, mines) {
     counter = mines
     table.innerHTML = '';
     table.classList.add('hidden')
-
     for (let i = 0; i < rows; i++){
         const row = table.insertRow(i);
         for (let j = 0; j < cols; j++){
@@ -147,15 +148,31 @@ function makeSurroundingCellsVisible(row, col, rows, cols) {
     }
 }
 
-easy.onclick = ()=> createGrid(9, 9, 10);
+easy.onclick = () => {
+    createGrid(9, 9, 10)
+    resetTimer()
+};
 
-medium.onclick = ()=> createGrid(16, 16, 40);
+medium.onclick = () => {
+    createGrid(16, 16, 40);
+    resetTimer();
+}
 
-hard.onclick = ()=> createGrid(16, 30, 99);
+hard.onclick = () => {
+    createGrid(16, 30, 99);
+    resetTimer();
+}
 
-reset.onclick = () => createGrid(lastGrid.rows, lastGrid.cols, lastGrid.mines);
+reset.onclick = () => {
+    createGrid(lastGrid.rows, lastGrid.cols, lastGrid.mines);
+    resetTimer()
+} 
+    
 
 function onClick(event, rows, cols, mines) {
+    if (firstClick) {
+        startTimer()
+    }
 if (!event.target.classList.contains('visible')) {
     let rowIndex = event.target.parentElement.rowIndex;
     let cellIndex = event.target.cellIndex;
@@ -173,6 +190,7 @@ if (!event.target.classList.contains('visible')) {
                     if (firstClick) {
                         firstGridBombReset(rowIndex, cellIndex, rows ,cols, mines)
                     } else {
+                        clearInterval(time)
                         event.target.classList.add('bomb')
                         alert('You have lost.')
                         table.classList.remove('hidden')
@@ -185,6 +203,7 @@ if (!event.target.classList.contains('visible')) {
     }
     if (visibleCounter == 0) {
         alert('Congratulations!! You have won.')
+        clearInterval(time)
         table.classList.remove('hidden')
     }
 }
@@ -223,5 +242,28 @@ button.onclick = function () {
         flag = true
         button.classList.add('active')
     }
+} 
+function startTimer() {
+    let start = Date.now()
+    time = setInterval(() => {
+        if (start) {
+            const dif = Date.now() - start
+            seconds = Math.round(dif / 1000);
+            let { secs, mins } = getMinsAndSeconds();
+            timer.innerHTML = mins + ':' + secs
+        }
+    }, 1000)
+    time
+}
+function resetTimer() {
+    clearInterval(time);
+    timer.innerHTML = '00:00'
+}
+function getMinsAndSeconds() {
+    let mins = Math.floor(seconds / 60);
+    let secs = seconds - mins * 60;
+    secs = secs < 10 ? "0" + secs : secs;
+    mins = mins < 10 ? "0" + mins : mins;
+    return { secs,mins}
 }
 createGrid(9, 9, 10)
