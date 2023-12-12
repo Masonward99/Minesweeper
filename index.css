@@ -1,0 +1,115 @@
+@font-face {
+    font-family: test;
+    src: url('./mine-sweeper.ttf');
+}
+
+table {
+    border: 1px solid black;
+    margin: auto;
+    max-width: 1200px;
+    min-width: 800px;
+    max-height: 650px;
+    font-size: 20px;
+    font-family: test;
+    background-color:#414a4c ;
+}
+td {
+    min-width: 40px;
+    border :1px solid white;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+tr {
+    height: 50px;
+}
+.visible {
+    font-size: 20px;
+    background-color: #B2BEB5;
+}
+.hidden {
+    font-size: 0;
+    background-color: #414a4c;
+}
+.hidden td.bomb {
+    background-color: #414a4c;
+}
+.flagged {
+    background-color: green !important;
+}
+.zero {
+    font-size:0px !important;
+}
+.bomb {
+    background-color: red;
+    font-size: 0px !important;
+}
+.difficulty {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 10px;
+}
+.difficulty button {
+    height: 50px;
+    width: 100px;
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: test;
+}
+.difficulty div {
+    height: 50px;
+    width: 100px;
+}
+.functions {
+    display: flex;
+    justify-content: space-around;
+}
+.buttonBox {
+    display: flex;
+    text-align: center;
+    margin: auto;
+    max-width: min 1200px;
+    justify-content: space-between;
+}
+.buttonBox div {
+    max-width: 400px;
+}
+h1 {
+    text-align: center;
+}
+p {
+    margin: 5px;
+    font-size: 0.8em;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+}
+main {
+    background-color: white;
+    font-family: test;
+    width: min-content;
+    margin: auto;
+}
+
+.difficulty button.active {
+    background-color: orange;
+}
+.one {
+    color:blue
+}
+.two {
+    color: green;
+}
+.three {
+    color: red;
+}
+.four {
+    color: darkblue;
+}
+.five {
+    color: darkred;
+}
