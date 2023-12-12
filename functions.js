@@ -58,8 +58,7 @@ function findAdjacentCells(row, col, numRows, numCols) {
 function addMines(rows, cols, mines) {
     for (let i = 0; i < mines; i++) {
         let cell = generateRandomCell(rows, cols)
-        cell.innerHTML = "x";
-        cell.classList.add('bomb')
+        cell.innerHTML = "*";
     }   
 }
 
@@ -72,7 +71,7 @@ function generateRandomCell(rows, cols) {
         return cell
     }
     cell = innerGenerateCell();
-    if (cell.innerHTML =='x') {
+    if (cell.innerHTML =='*') {
         return generateRandomCell(rows, cols)
     } else {
         return cell
@@ -81,7 +80,7 @@ function generateRandomCell(rows, cols) {
 
 
 function generateNumber(row, col, rows, cols) {
-    if (table.rows[row].cells[col].innerHTML != 'x') {
+    if (table.rows[row].cells[col].innerHTML != '*') {
         let count = 0;
         for (let i = row - 1; i < row + 2; i++){
             if (0 <= i && i < rows) {
@@ -89,7 +88,7 @@ function generateNumber(row, col, rows, cols) {
                     if (-1 < j && j < cols) {
                         if (j != col || i != row) {
                             let cell = table.rows[i].cells[j]
-                            if (cell.innerHTML == 'x') {
+                            if (cell.innerHTML == '*') {
                                 count++
                             }
                         }
@@ -162,7 +161,7 @@ if (!event.target.classList.contains('visible')) {
     let cellIndex = event.target.cellIndex;
     if (!flag) {
         if (!event.target.classList.contains('flagged')) {
-            if (event.target.innerHTML != 'x') {
+            if (event.target.innerHTML != '*') {
                 firstClick = false;
                 if (event.target.innerHTML == 0) {
                     makeSurroundingCellsVisible(rowIndex, cellIndex, rows, cols)
@@ -191,7 +190,7 @@ if (!event.target.classList.contains('visible')) {
 }
 function firstGridBombReset(row, col, rows, cols, mines) {
     createGrid(rows, cols, mines)
-    if (table.rows[row].cells[col].innerHTML == 'x') {
+    if (table.rows[row].cells[col].innerHTML == '*') {
         firstGridBombReset(row, col, rows, cols, mines)
     }
     firstClick = false;
