@@ -14,7 +14,6 @@ let visibleCounter
 let counter 
 let lastGrid = { rows: 9, cols: 9, mines: 10 }
 let time;
-let seconds;
 
 function createGrid(rows, cols, mines) {
     firstClick = true
@@ -248,8 +247,11 @@ function startTimer() {
     time = setInterval(() => {
         if (start) {
             const dif = Date.now() - start
-            seconds = Math.round(dif / 1000);
-            let { secs, mins } = getMinsAndSeconds();
+            let seconds = Math.round(dif / 1000);
+            let mins = Math.floor(seconds / 60);
+            let secs = seconds - mins * 60;
+            secs = secs < 10 ? "0" + secs : secs;
+            mins = mins < 10 ? "0" + mins : mins;
             timer.innerHTML = mins + ':' + secs
         }
     }, 1000)
@@ -259,11 +261,5 @@ function resetTimer() {
     clearInterval(time);
     timer.innerHTML = '00:00'
 }
-function getMinsAndSeconds() {
-    let mins = Math.floor(seconds / 60);
-    let secs = seconds - mins * 60;
-    secs = secs < 10 ? "0" + secs : secs;
-    mins = mins < 10 ? "0" + mins : mins;
-    return { secs,mins}
-}
+
 createGrid(9, 9, 10)
