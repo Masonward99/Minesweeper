@@ -31,8 +31,9 @@ tr {
     font-size: 0;
     background-color: #414a4c;
 }
-.flagged {
+table .flagged {
     background-color: green !important;
+    color: white;
 }
 .zero {
     font-size:0px !important;
